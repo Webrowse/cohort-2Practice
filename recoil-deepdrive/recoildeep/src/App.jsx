@@ -1,11 +1,14 @@
 import { RecoilRoot, useRecoilState, useRecoilValue, useSetRecoilState } from "recoil"
 import { networkAtom, jobAtom, notificationAtom, messageAtom, totalNotificationSelector } from "./atoms"
+import { Suspense } from "react"
 
 
 
 function App() {
   return <RecoilRoot>
+    <Suspense fallback={<loading />}>
     <MainApp />
+    </Suspense>
     
   </RecoilRoot>
 }
