@@ -1,26 +1,33 @@
-import { useState } from 'react';
-import './App.css'
+import React, { useEffect, useState } from 'react';
 
-function App() {
- 
-
+function App(){
+ const [render, setRender] = useState(true);
+  useEffect(() => {
+    setInterval(() => {setRender(r=>!r)}, 2000);
+  },[])
   return (
     <>
-    <MyComponent />
+     
+       {render? <MyComponent />: <div></div>}
+      
     </>
   )
 }
-function MyComponent () {
-const [count, setCount] = useState(0);
 
-const incrementCount = () => {
-setCount(count + 1);
-};
-return (
-<div>
-<p>{count} </p>
-<button onClick={incrementCount}>Increment</button>
-</div>
-);
+function MyComponent() {
+  useEffect(() => {
+    // Component mounting logic
+    console.log('Component mounted');
+    return () => {
+      // Component unmounting logic
+      console.log('Component unmounted');
+    };
+  }, []);
+
+  return (
+    <div>
+      MyComponent
+    </div>
+  );
 }
 export default App
