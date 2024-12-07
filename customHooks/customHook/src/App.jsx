@@ -1,33 +1,31 @@
-import React, { useEffect, useState } from 'react';
-
+import  { useEffect, useState } from 'react';
+import axios from 'axios';
 function App(){
- const [render, setRender] = useState(true);
+ const [mytodos, setMytodos] = useState([]);
   useEffect(() => {
-    setInterval(() => {setRender(r=>!r)}, 2000);
+    axios.get('https://dummyjson.com/todos')
+    .then(res => {
+      setMytodos(res.data.todos);
+      console.log(mytodos); 
+    })
   },[])
   return (
     <>
      
-       {render? <MyComponent />: <div></div>}
+       {mytodos.map(abc => <Track bc={abc} key={abc.id} />)}
       
     </>
   )
 }
-
-function MyComponent() {
-  useEffect(() => {
-    // Component mounting logic
-    console.log('Component mounted');
-    return () => {
-      // Component unmounting logic
-      console.log('Component unmounted');
-    };
-  }, []);
-
+function Track({bc}) {
   return (
-    <div>
-      MyComponent
+    <div> 
+      {bc.todo}
     </div>
-  );
+  )
 }
+
+
+
+
 export default App
