@@ -12,15 +12,15 @@ function App(){
   return (
     <>
      
-       {mytodos.map(abc => <Track bc={abc} key={abc.id} />)}
+       {mytodos.map(abc => <Track todo={abc} key={abc.id} />)}
       
     </>
   )
 }
-function Track({bc}) {
+function Track({todo}) {
   return (
     <div> 
-      {bc.todo}
+      {todo.todo}
     </div>
   )
 }
