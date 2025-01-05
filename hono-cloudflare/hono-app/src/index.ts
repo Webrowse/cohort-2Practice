@@ -2,7 +2,11 @@ import { Hono } from 'hono'
 
 const app = new Hono()
 
-app.get('/', (c) => {
+app.post('/', async (c) => {
+  const body = await c.req.json()
+  console.log('Received JSON payload:', body)
+  console.log(c.req.header("Authorization"));
+  console.log(c.req.query("param"));
   return c.text('Hello Hono!')
 })
 
